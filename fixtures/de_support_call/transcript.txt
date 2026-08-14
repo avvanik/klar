@@ -1,0 +1,6 @@
+agent: Support, guten Tag. Wie kann ich Ihnen helfen?
+customer: Mein CardioScan-Gerät startet nach dem letzten Firmware-Update nicht mehr.
+agent: Das tut mir leid. Haben Sie nach dem Firmware-Update eine Sensorkalibrierung durchgeführt?
+customer: Nein, das wusste ich nicht. Ist das Gerät noch in der Garantie?
+agent: Ich prüfe das und sende Ihnen heute eine Anleitung zur Sensorkalibrierung.
+customer: Vielen Dank, das beruhigt mich.

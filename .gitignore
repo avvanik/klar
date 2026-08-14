@@ -1,0 +1,24 @@
+# Secrets
+.env
+
+# Klar state (SQLite + artifacts)
+.klar/
+*.sqlite
+*.sqlite3
+
+# Generated sample audio (regenerate with scripts/generate_samples.py)
+samples/*.mp3
+samples/*.wav
+samples/*.m4a
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+*.egg-info/
+.pytest_cache/
+.coverage
+htmlcov/
+dist/
+build/

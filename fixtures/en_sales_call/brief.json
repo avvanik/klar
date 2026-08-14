@@ -1,0 +1,32 @@
+{
+  "language": "en",
+  "summary": "The agent called the customer to follow up on their proof of concept. The customer expressed positive impressions but indicated they need pricing information before committing. The agent committed to sending the order form, pricing, and a security review document by Friday. The customer confirmed they will sign off on the POC if the numbers are satisfactory.",
+  "action_items": [
+    {
+      "owner": "agent",
+      "text": "Send the order form and pricing to the customer by Friday"
+    },
+    {
+      "owner": "agent",
+      "text": "Loop in the security team and send the security review document to the customer this week"
+    }
+  ],
+  "decisions": [
+    "Customer will sign off on the proof of concept if the pricing works for them"
+  ],
+  "open_questions": [
+    "Will the pricing meet the customer's requirements?"
+  ],
+  "sentiment_by_speaker": [
+    {
+      "speaker": "agent",
+      "sentiment": "positive",
+      "rationale": "The agent is cooperative and responsive, readily agreeing to all customer requests and committing to clear deliverables."
+    },
+    {
+      "speaker": "customer",
+      "sentiment": "positive",
+      "rationale": "The customer expressed being impressed with the POC and showed willingness to move forward, contingent on satisfactory pricing and documentation."
+    }
+  ]
+}

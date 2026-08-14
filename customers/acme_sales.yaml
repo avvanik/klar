@@ -1,0 +1,33 @@
+# Customer: Acme (B2B sales calls, English).
+# Goal: capture commitments and next steps. Boost product/brand names so Scribe
+# spells them right, and emphasise action items + decisions in the brief.
+name: acme_sales
+
+language_hints: ["eng"]          # first hint -> Scribe language_code
+
+keyterms:                        # bias transcription toward these exact spellings
+  - Acme
+  - Acme Cloud
+  - Klar
+  - ElevenLabs
+  - Scribe v2
+  - MRR
+  - proof of concept
+  - order form
+
+num_speakers: 2
+detect_speaker_roles: true       # label speakers agent/customer instead of speaker_0/1
+no_verbatim: false               # keep filler; sales tone can matter
+
+emphasis:                        # fields the extractor should be most thorough on
+  - action_items
+  - decisions
+
+glossary:
+  POC: "Proof of concept - a time-boxed trial before a paid contract."
+  MRR: "Monthly recurring revenue."
+  order form: "The document a customer signs to purchase."
+
+extraction_instructions: >
+  Treat any spoken commitment ('I'll send', 'we'll get you', 'by Friday') as an
+  action item with a clear owner and, where stated, a due date in the text.

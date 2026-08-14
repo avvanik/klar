@@ -1,0 +1,26 @@
+# Fixed eval set. `python -m klar eval` runs the pipeline over each sample and
+# asserts the brief validates AND contains the known keywords below.
+#
+# Generate the audio first (needs ELEVENLABS_API_KEY):
+#     python scripts/generate_samples.py
+#
+# Keep this set small (3-5). Keywords should be entities/terms that MUST appear
+# in a correct brief - they are the ground truth for extraction quality.
+
+samples:
+  - file: en_sales_call.mp3
+    language: eng
+    customer: acme_sales
+    expect_keywords: ["Acme", "proof of concept", "Friday"]
+    min_action_items: 2
+
+  - file: de_support_call.mp3
+    language: deu
+    customer: medtech_support
+    expect_keywords: ["CardioScan", "Firmware"]
+    min_action_items: 1
+
+  - file: es_project_sync.mp3
+    language: spa
+    expect_keywords: ["presupuesto", "diseño"]
+    min_action_items: 1

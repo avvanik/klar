@@ -1,0 +1,33 @@
+{
+  "language": "deu",
+  "summary": "Ein Kunde meldet, dass sein CardioScan Pro nach einem Firmware-Update nicht mehr startet. Der Support-Agent stellt fest, dass die erforderliche Sensor-Kalibrierung nach dem Update nicht durchgeführt wurde, und kündigt an, noch heute eine entsprechende Anleitung zuzusenden. Die Garantiefrage des Kunden konnte im Gespräch nicht abschließend geklärt werden.",
+  "action_items": [
+    {
+      "owner": "agent",
+      "text": "Anleitung zur Sensor-Kalibrierung noch heute an den Kunden senden."
+    },
+    {
+      "owner": "agent",
+      "text": "Garantiestatus des CardioScan Pro des Kunden prüfen und Ergebnis mitteilen."
+    }
+  ],
+  "decisions": [
+    "Der Agent wird dem Kunden eine Anleitung zur Sensor-Kalibrierung zusenden, da diese nach dem Firmware-Update nicht durchgeführt wurde."
+  ],
+  "open_questions": [
+    "Ist das CardioScan Pro des Kunden noch unter Garantie? Der Agent hat die Prüfung angekündigt, aber kein Ergebnis im Gespräch mitgeteilt.",
+    "Wird die Sensor-Kalibrierung das Startproblem des Geräts tatsächlich beheben, oder liegt ein weitergehender Defekt vor?"
+  ],
+  "sentiment_by_speaker": [
+    {
+      "speaker": "customer",
+      "sentiment": "mixed",
+      "rationale": "Der Kunde ist zunächst besorgt und frustriert, da sein Gerät nach dem Firmware-Update nicht mehr funktioniert und er keine Kenntnis von der erforderlichen Sensor-Kalibrierung hatte. Am Ende des Gesprächs zeigt er Erleichterung ('das beruhigt mich'), nachdem der Agent Hilfe zusagt."
+    },
+    {
+      "speaker": "agent",
+      "sentiment": "positive",
+      "rationale": "Der Agent reagiert empathisch, strukturiert und lösungsorientiert; er kündigt konkrete Maßnahmen (Anleitung, Garantieprüfung) an und hält einen professionellen, freundlichen Ton."
+    }
+  ]
+}

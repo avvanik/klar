@@ -1,0 +1,5 @@
+speaker_0: Hola equipo, vamos a revisar el estado del proyecto de diseño.
+speaker_1: El diseño va bien, pero necesitamos aprobar el presupuesto esta semana.
+speaker_0: De acuerdo. Enviaré el presupuesto actualizado al cliente mañana.
+speaker_1: Perfecto. ¿Quién se encarga de la revisión final del diseño?
+speaker_0: Yo me encargo de la revisión final del diseño antes del viernes.

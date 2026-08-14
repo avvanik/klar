@@ -1,0 +1,6 @@
+agent: Hi, thanks for making time. I'm calling from Acme about your proof of concept.
+customer: Of course. We were impressed, but we still need pricing before we commit.
+agent: Understood. I'll send the order form and pricing by Friday.
+customer: Great. And can you include the security review document as well?
+agent: Yes. I'll loop in our security team and get you that document this week.
+customer: Perfect. If the numbers work, we'll sign off on the proof of concept.

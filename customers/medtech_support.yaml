@@ -1,0 +1,31 @@
+# Customer: MedTech support/triage calls, German, clinical vocabulary.
+# Goal: clean, readable transcript (drop filler), boost device/clinical terms,
+# and emphasise open questions + per-speaker sentiment (patient wellbeing).
+name: medtech_support
+
+language_hints: ["deu"]          # German
+
+keyterms:
+  - CardioScan
+  - CardioScan Pro
+  - Sensor-Kalibrierung
+  - Firmware-Update
+  - Blutdruckmanschette
+  - Patient-ID
+  - Garantie
+
+num_speakers: 2
+detect_speaker_roles: true
+no_verbatim: true                # cleaner transcript for clinical review
+
+emphasis:
+  - open_questions
+  - sentiment_by_speaker
+
+glossary:
+  CardioScan Pro: "MedTech's flagship ECG monitoring device."
+  Sensor-Kalibrierung: "Sensor calibration routine required after firmware updates."
+
+extraction_instructions: >
+  Flag anything the support agent could not resolve as an open question. Judge
+  sentiment from the caller's perspective with care; note frustration or relief.

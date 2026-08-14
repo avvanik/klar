@@ -1,0 +1,33 @@
+{
+  "language": "es",
+  "summary": "El equipo revisó el estado del proyecto de diseño. Se acordó que speaker_0 enviará el presupuesto actualizado al cliente mañana y también se encargará de la revisión final del diseño antes del viernes. El presupuesto debe aprobarse esta semana.",
+  "action_items": [
+    {
+      "owner": "speaker_0",
+      "text": "Enviar el presupuesto actualizado al cliente mañana"
+    },
+    {
+      "owner": "speaker_0",
+      "text": "Realizar la revisión final del diseño antes del viernes"
+    }
+  ],
+  "decisions": [
+    "El presupuesto debe aprobarse esta semana",
+    "speaker_0 se encarga de la revisión final del diseño"
+  ],
+  "open_questions": [
+    "¿El cliente aprobará el presupuesto a tiempo?"
+  ],
+  "sentiment_by_speaker": [
+    {
+      "speaker": "speaker_0",
+      "sentiment": "positive",
+      "rationale": "Muestra disposición y compromiso al asumir responsabilidades concretas"
+    },
+    {
+      "speaker": "speaker_1",
+      "sentiment": "neutral",
+      "rationale": "Plantea necesidades y preguntas de forma objetiva sin expresar preocupación excesiva"
+    }
+  ]
+}
