@@ -125,6 +125,12 @@ def run_pipeline(
                 max_transcript_chars=max_transcript_chars,
             )
 
+        # The brief's language mirrors Scribe's detection rather than the
+        # summarizer's guess, so the brief and the transcript always agree on
+        # one code (Scribe is the source of truth for language).
+        if transcript.language_code and transcript.language_code != "unknown":
+            brief.language = transcript.language_code
+
         # --- Stage 4: persist artifacts ----------------------------------
         with timer.stage("persist"):
             transcript_path = store.write_json(ing.content_hash, version, "transcript.json", transcript)
