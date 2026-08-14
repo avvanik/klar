@@ -87,7 +87,7 @@ class Brief(BaseModel):
 
     model_config = ConfigDict(extra="forbid")
 
-    language: str = Field(description="ISO code of the recording's language.")
+    language: str = Field(description="Language code, set from Scribe's detected transcript language (ISO-639-3, e.g. eng/deu/spa).")
     summary: str = Field(min_length=1)
     action_items: list[ActionItem] = Field(default_factory=list)
     decisions: list[str] = Field(default_factory=list)

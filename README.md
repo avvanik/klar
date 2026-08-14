@@ -194,7 +194,7 @@ All secrets and tunables come from the environment (see `.env.example`):
 
 ```bash
 pip install -r requirements.txt
-pytest                     # 56 unit tests: hashing, ingest, STT mapping, extract
+pytest                     # 57 unit tests: hashing, ingest, STT mapping, extract
                            # retry, store idempotency, pipeline, eval, reliability
                            # paths (API retries, model fail-fast, long-transcript
                            # map-reduce), and golden fixtures

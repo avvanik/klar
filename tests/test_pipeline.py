@@ -72,3 +72,13 @@ def test_pipeline_records_failure_after_ingest(store, audio_file):
     runs = store.list_runs()
     assert len(runs) == 1 and runs[0]["status"] == "failed"
     assert "scribe exploded" in runs[0]["error"]
+
+
+def test_pipeline_language_comes_from_transcript(store, audio_file):
+    from .fakes import VALID_BRIEF
+
+    payload = dict(VALID_BRIEF)
+    payload["language"] = "en"  # summarizer guesses ISO-639-1
+    result = run_pipeline(audio_file, store=store, transcriber=FakeTranscriber(), llm=FakeLLM(payload))
+    # brief language is overridden to Scribe's detected code (transcript -> "eng")
+    assert result.brief.language == "eng"
