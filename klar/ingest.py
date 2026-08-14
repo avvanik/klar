@@ -10,7 +10,7 @@ from dataclasses import dataclass
 from pathlib import Path
 
 from .errors import EmptyAudioError, MissingFileError, UnsupportedFormatError
-from .hashing import hash_file, short_hash
+from .hashing import hash_file
 
 # Formats Scribe v2 accepts (audio + video), per the ElevenLabs docs.
 SUPPORTED_EXTS = {
@@ -24,18 +24,12 @@ SUPPORTED_EXTS = {
 # ~100ms of audio is Scribe's stated minimum; anything smaller is certainly junk.
 MIN_BYTES = 256
 
-AUDIO_EXTS = tuple(sorted(SUPPORTED_EXTS))
-
 
 @dataclass(frozen=True)
 class Ingested:
     path: Path
     content_hash: str
     size_bytes: int
-
-    @property
-    def short(self) -> str:
-        return short_hash(self.content_hash)
 
 
 def ingest(path: str | Path) -> Ingested:

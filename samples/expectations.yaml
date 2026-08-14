@@ -24,3 +24,8 @@ samples:
     language: spa
     expect_keywords: ["presupuesto", "diseño"]
     min_action_items: 1
+
+  - file: fr_kickoff_call.mp3
+    language: fra
+    expect_keywords: ["budget", "calendrier"]
+    min_action_items: 1

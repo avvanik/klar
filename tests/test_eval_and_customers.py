@@ -12,8 +12,10 @@ def test_normalize_lang_matches_iso1_and_iso3():
     assert normalize_lang("spa") == normalize_lang("es")
     assert normalize_lang("eng") == normalize_lang("en")
     assert normalize_lang("deu") == normalize_lang("de")
+    assert normalize_lang("fra") == normalize_lang("fr")  # French sample
     # genuinely different languages must not collide
     assert normalize_lang("spa") != normalize_lang("deu")
+    assert normalize_lang("fra") != normalize_lang("spa")
 
 
 def test_negative_checks_all_pass():

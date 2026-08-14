@@ -66,6 +66,16 @@ DIALOGUES: list[tuple[str, list[tuple[int, str]]]] = [
             (0, "Yo me encargo de la revisión final del diseño antes del viernes."),
         ],
     ),
+    (
+        "fr_kickoff_call.mp3",
+        [
+            (0, "Bonjour, merci pour votre temps. Je vous appelle au sujet du budget du nouveau projet."),
+            (1, "Bien sûr. Nous sommes intéressés, mais nous devons valider le calendrier avant de nous engager."),
+            (0, "Je comprends. Je vous enverrai le devis et le calendrier avant vendredi."),
+            (1, "Parfait. Pouvez-vous aussi inclure le plan de formation ?"),
+            (0, "Oui, j'ajouterai le plan de formation au document cette semaine."),
+        ],
+    ),
 ]
 
 

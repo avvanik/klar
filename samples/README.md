@@ -1,6 +1,6 @@
 # samples/
 
-The eval set. Audio is **not** committed (see `.gitignore`) - regenerate it.
+The eval set. Audio is **not** committed (see `.gitignore`); regenerate it.
 
 ## Generate the sample audio
 
@@ -9,13 +9,14 @@ export ELEVENLABS_API_KEY=...        # or put it in .env
 python scripts/generate_samples.py
 ```
 
-This writes three short two-speaker clips that match `expectations.yaml`:
+This writes four short two-speaker clips that match `expectations.yaml`:
 
 | file                 | language | customer          | tests |
 |----------------------|----------|-------------------|-------|
 | `en_sales_call.mp3`  | English  | `acme_sales`      | action items, "Friday" due date, brand keyterms |
 | `de_support_call.mp3`| German   | `medtech_support` | German STT, clinical keyterms, open questions |
 | `es_project_sync.mp3`| Spanish  | (default)         | Spanish STT, budget/design keywords |
+| `fr_kickoff_call.mp3`| French   | (default)         | French STT, budget/calendar keywords |
 
 ## Add your own
 

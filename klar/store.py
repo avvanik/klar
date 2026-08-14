@@ -15,6 +15,7 @@ import sqlite3
 from pathlib import Path
 from typing import Any
 
+from .hashing import short_hash
 from .observe import RunRecord
 
 _SCHEMA = """
@@ -129,7 +130,7 @@ class Store:
 
     # --- artifacts (transcript + brief on disk) ---------------------------
     def artifact_dir(self, content_hash: str, version: int) -> Path:
-        d = self.artifacts_dir / content_hash[:12] / f"v{version}"
+        d = self.artifacts_dir / short_hash(content_hash) / f"v{version}"
         d.mkdir(parents=True, exist_ok=True)
         return d
 

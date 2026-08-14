@@ -65,7 +65,7 @@ offline. The robustness checks and unit tests mock the SDKs.
                └────┬────┘  │ timestamps │  │ STRICT   │  │ (files)   │
                     │       └─────┬──────┘  │ JSON     │  └────┬─────┘
         idempotency │             │         │ (retry×1)│       │
-        check �run  │             │         └────┬─────┘       │
+        check: run  │             │         └────┬─────┘       │
         already ok? │             │              │            │
                     ▼             ▼              ▼            ▼
                ┌────────────────────────────────────────────────┐
