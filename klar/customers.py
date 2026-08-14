@@ -1,14 +1,14 @@
 """Per-customer configuration.
 
-This is the Forward-Deployed signal: the *same* pipeline behaves differently for
-each customer, driven by a small YAML file. The config feeds two stages:
+The same pipeline behaves differently per customer, driven by a small YAML file.
+The config feeds two stages:
 
   transcribe: language hint, keyterms to boost, speaker count, role detection,
               verbatim cleanup.
   extract:    which brief fields to emphasise, a glossary, and any extra
               instructions injected into the LLM prompt.
 
-Switching the file visibly changes the STT request and the brief.
+Switching the file changes the STT request and the brief.
 """
 
 from __future__ import annotations

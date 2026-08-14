@@ -20,8 +20,12 @@ python -m klar run samples/en_sales_call.mp3 --customer acme_sales
 
 Drop in an audio/video recording; get back a strict-schema JSON brief plus a row in
 a run log. Re-running the same file doesn't duplicate work. A per-customer YAML file
-changes how both transcription and extraction behave. That's the Forward-Deployed signal:
-the same pipeline, adapted per account without code changes.
+changes how both transcription and extraction behave: the same pipeline, adapted per
+account without code changes.
+
+Two supporting docs: [`docs/deployment-one-pager.md`](docs/deployment-one-pager.md)
+covers how Klar is configured and rolled out per customer;
+[`docs/elevenagents-qa.md`](docs/elevenagents-qa.md) is the realtime voice Q&A design.
 
 ## 30-second quickstart
 
@@ -130,7 +134,6 @@ tests/      unit tests + eval harness (SDKs mocked, run offline)
 
 The same call under a different customer config produces a different transcript
 request (language, boosted keyterms, role labels) and a differently-weighted brief.
-That's the point.
 
 ### Per-customer adaptability
 
@@ -144,7 +147,7 @@ clinical device terms (`CardioScan Pro`, `Sensor-Kalibrierung`), enables
 and **per-speaker sentiment**. Swapping the `--customer` flag visibly changes both
 the STT call and the resulting brief.
 
-## Production thinking
+## Behaviour
 
 **Idempotency.** A recording's identity is the **SHA-256 of its bytes**, not its
 filename, so the same file (even renamed) is recognised. If a successful run exists we
@@ -172,12 +175,11 @@ goes red.
 
 **Observability.** Every run, success *or* failure, writes a `RunRecord`: input hash,
 language, model versions, per-stage latency, token counts, a cost estimate, and
-`pass|fail`. `python -m klar runs` prints it as a table. Failures are as visible as
-successes, which is what you need at 2am.
+`pass|fail`. `python -m klar runs` prints it as a table.
 
 **Swappable by interface.** Transcription sits behind a `Transcriber` protocol,
-extraction behind an `LLMClient`; SDKs are lazy-imported, which is what lets the whole
-test suite run offline with fakes and lets you swap providers with one adapter.
+extraction behind an `LLMClient`; SDKs are lazy-imported, so the whole test suite runs
+offline with fakes and you can swap providers with one adapter.
 
 ## Configuration
 
@@ -192,10 +194,10 @@ All secrets and tunables come from the environment (see `.env.example`):
 
 ```bash
 pip install -r requirements.txt
-pytest                     # 48 unit tests: hashing, ingest, STT mapping, extract
-                           # retry, store idempotency, pipeline, eval, plus the
-                           # reliability paths (API retries, model fail-fast,
-                           # long-transcript map-reduce)
+pytest                     # 56 unit tests: hashing, ingest, STT mapping, extract
+                           # retry, store idempotency, pipeline, eval, reliability
+                           # paths (API retries, model fail-fast, long-transcript
+                           # map-reduce), and golden fixtures
 ```
 
 Tests mock the ElevenLabs and Anthropic SDKs, so they need no network and no keys.
@@ -219,19 +221,16 @@ Language codes are ISO-639-3 (`eng`, `deu`, `spa`).
 
 ## Voice loop
 
-Klar uses a second ElevenLabs surface too: `python -m klar run <file> --speak` reads
-the brief's summary and top next-steps back aloud via **Text-to-Speech**, saving a
-`summary.mp3` next to the brief. So the pipeline both listens (Scribe STT) and speaks
-(TTS), not just a data pipeline that happens to call Scribe.
+`python -m klar run <file> --speak` reads the brief's summary and top next-steps back
+aloud via **Text-to-Speech**, saving a `summary.mp3` next to the brief. The pipeline
+uses two ElevenLabs surfaces: Scribe (STT) in and Text-to-Speech out.
 
 ## Stretch (scoped, not built)
 
 An **ElevenAgents** voice agent that answers questions over the stored briefs and
-replies in voice ("what did we commit to Acme last week?"). The `Brief` artifacts are
-already a clean knowledge base for it. The realtime design (latency budget, streaming
-transcription, eval approach) is written up in
-[`docs/elevenagents-qa.md`](docs/elevenagents-qa.md). Left unbuilt to keep the demo
-focused, but scoped so the next step is obvious.
+replies in voice ("what did we commit to Acme last week?"). The `Brief` artifacts are a
+knowledge base for it. Realtime design (latency budget, streaming transcription, eval
+approach) is in [`docs/elevenagents-qa.md`](docs/elevenagents-qa.md).
 
 ## License
 

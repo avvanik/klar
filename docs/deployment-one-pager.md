@@ -1,32 +1,25 @@
 # Deploying Klar for a large CX org
 
-*How I'd take Klar to production for a Deutsche-Telekom-style CX org: high call volume,
+*What deploying Klar for a Deutsche-Telekom-style CX org looks like: high call volume,
 German and English, regulated, existing contact-centre stack.*
 
-## The problem
-Thousands of support and sales calls a day. They want every call to leave a structured,
-searchable brief (commitments, decisions, open questions, sentiment) without adding
-handle time or a second tool for agents to babysit.
+## What it delivers
+Every call leaves a structured, searchable brief (commitments, decisions, open
+questions, sentiment) without adding handle time or a second tool for agents.
 
-## Why Klar fits
-Klar isn't a transcription product. It's a per-account extraction pipeline. One YAML file
-per team changes both the transcript request and the brief. No fork, no redeploy. That's
-why this is an FDE job, not a SaaS signup.
-
-## Week 1: discovery, not config
-* Pull 20 to 30 real calls per team and listen.
-* Collect the words that break generic STT: product names, tariffs, device models,
-  acronyms. These become `keyterms` and the `glossary`.
-* Agree what decision the brief drives. Sales wants commitments and next steps. Retention
-  wants open questions and sentiment. That sets `emphasis`.
-* Fix the data boundaries now: PII, retention, EU residency, who can read a brief.
-  Everything below depends on it.
-
-## Configuration: the file they own
+## Configuration per team
 Each team is one `customers/<team>.yaml` (`acme_sales.yaml` and `medtech_support.yaml`
 are the templates): language, keyterms, speaker roles, verbatim cleanup, emphasised
-fields, glossary. Their own ops lead edits it. That's what makes the deployment stick
-after I leave.
+fields, glossary. One file changes both the transcript request and the brief, with no
+code change, and the team's own ops lead can edit it.
+
+Setup per team:
+* Pull 20 to 30 real calls and listen.
+* Collect the vocabulary that breaks generic STT (product names, tariffs, device models,
+  acronyms) into `keyterms` and the `glossary`.
+* Set `emphasis` to the fields that team needs. Sales: commitments and next steps.
+  Retention: open questions and sentiment.
+* Fix the data boundaries: PII, retention, EU residency, who can read a brief.
 
 ## Rollout: phased and gated
 1. Shadow. Recordings only, agents see nothing. Tune configs until the briefs are
@@ -34,43 +27,36 @@ after I leave.
 2. Assist. The brief goes to the agent after the call, one click to paste into the CRM.
 3. Integrate. Push action items and decisions into the CRM or ticketing.
 
-Each phase has a gate: the eval stays green on that team's samples before it moves on.
+Each phase gates on the eval staying green on that team's samples before it advances.
 
-## What I'd measure
+## Metrics
 * Extraction quality: `klar eval` keyword and entity recall on a labelled sample set.
-  This is the acceptance gate.
-* Editing rate: how often an agent changes a brief before saving. The real quality signal
-  once live. I want it dropping.
-* Coverage and cost: share of calls processed, and the per-call cost already in the run
-  log.
-* Latency: p95 on transcribe and extract, already recorded.
-* Adoption: briefs actually used downstream.
+  The acceptance gate.
+* Editing rate: how often an agent changes a brief before saving.
+* Coverage and cost: share of calls processed, plus the per-call cost from the run log.
+* Latency: p95 on transcribe and extract, from the run log.
+* Adoption: briefs used downstream.
 
 ## Data and compliance
 Transcripts and briefs are personal data, and support calls are often special-category.
-Before any real audio: EU-region processing, encryption at rest, a retention and
-redaction policy, access control on the store. Klar writes plaintext JSON locally today.
-Fine for a demo, not fine for regulated data. I'd scope this in week 1, not find it in
-the pilot.
+Before real audio: EU-region processing, encryption at rest, a retention and redaction
+policy, access control on the store. Klar writes plaintext JSON locally today, which is
+fine for a demo and not for regulated data.
 
-## Batch vs realtime
-Klar is batch, on purpose. Call ends, transcribe the file, one extraction pass
-(map-reduced for long calls), brief out. That's the right shape for post-call
-intelligence: full context, cheaper, more accurate. It covers most of the value.
+## Batch and realtime
+Klar is batch: call ends, transcribe the file, one extraction pass (map-reduced for long
+calls), brief out. Post-call intelligence with full context.
 
-Realtime is a different problem: streaming transcripts, sub-second turns, incremental
-extraction, no second look at the audio. The next surface here is realtime agent-assist
-(live open-question and next-best-action hints during the call) and an ElevenAgents voice
-agent over the stored briefs ("what did we commit to Kunde X last week?", answered in
-voice). The `Brief` files are already the knowledge base for it. Batch is the foundation,
-realtime is the roadmap, and I'd call it new engineering, not a config flag. Design in
-`docs/elevenagents-qa.md`.
+Realtime is separate work: streaming transcripts, sub-second turns, incremental
+extraction. The next surfaces are realtime agent-assist (live open-question and
+next-best-action hints during the call) and an ElevenAgents voice agent over the stored
+briefs. Design in `docs/elevenagents-qa.md`.
 
-## Risks I'd name on day one
-1. STT accuracy on domain vocab and accents. Keyterms plus a per-team eval gate, measured
-   not assumed.
-2. Compliance scope creep. Handled up front.
-3. Agent trust. Shadow-first rollout and the editing-rate metric earn it.
+## Risks
+1. STT accuracy on domain vocab and accents. Handled by keyterms and a per-team eval
+   gate.
+2. Compliance scope. Handled up front.
+3. Agent trust. Handled by shadow-first rollout and the editing-rate metric.
 
 ## Timeline
 Week 1 discovery and first configs. Weeks 2 to 3 shadow and tune to a green eval. Week 4
